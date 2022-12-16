@@ -1,5 +1,6 @@
 locals {
-  redis_container_name = "redis"
+  has_additional_attributes = length(var.attributes) > 1
+  redis_container_name      = "redis"
 }
 
 # can't just pull in the context here because the attributes add up instead of being replaced by the input
@@ -31,6 +32,7 @@ module "redis_label" {
   version = "0.25.0"
 
   context     = module.ddb_label.context
+  attributes  = concat(["kvstore_${try(var.attributes[0], "")}"], local.has_additional_attributes ? slice(var.attributes, 1, length(var.attributes)) : [])
   label_order = var.redis_label_order
 }
 
@@ -38,7 +40,7 @@ module "ddb" {
   source = "github.com/justtrackio/terraform-aws-dynamodb-table?ref=v1.0.0"
 
   context    = module.ddb_label.context
-  attributes = ["kvstore-${join("", var.attributes)}"]
+  attributes = concat(["kvstore-${try(var.attributes[0], "")}"], local.has_additional_attributes ? slice(var.attributes, 1, length(var.attributes)) : [])
 
   billing_mode = var.ddb_billing_mode
 
@@ -55,7 +57,7 @@ module "ddb" {
   ttl_enabled = false
 
   tags = {
-    Model = "kvstore_${join("", var.attributes)}"
+    Model = "kvstore_${try(var.attributes[0], "")}"
   }
 }
 
@@ -96,7 +98,7 @@ module "redis" {
   desired_count                      = var.redis_desired_count
   ecs_cluster_arn                    = var.redis_ecs_cluster_arn
   launch_type                        = var.redis_launch_type
-  name                               = "${module.redis_label[0].id}-redis-kvstore_${join("", var.attributes)}"
+  name                               = "${var.name}${module.this.delimiter}redis"
   network_mode                       = var.redis_network_mode
   propagate_tags                     = var.redis_propagate_tags
   vpc_id                             = var.redis_vpc_id
@@ -108,7 +110,7 @@ module "redis" {
   }]
 
   tags = {
-    Model           = "kvstore_${join("", var.attributes)}"
+    Model           = "kvstore_${try(var.attributes[0], "")}"
     ApplicationType = "redis"
   }
 
@@ -120,7 +122,7 @@ module "redis" {
 
 resource "aws_service_discovery_service" "this" {
   count = var.use_redis ? 1 : 0
-  name  = "kvstore_${join("", var.attributes)}.${module.this.name}.redis"
+  name  = "kvstore_${try(var.attributes[0], "")}.${module.this.name}.redis"
 
   dns_config {
     namespace_id = var.redis_service_discovery_dns_namespace_id
