@@ -61,6 +61,83 @@ module "ddb" {
   }
 }
 
+module "task_label" {
+  source      = "cloudposse/label/null"
+  version     = "0.25.0"
+  attributes  = ["task"]
+  label_order = var.iam_role_label_order
+
+  context = module.this.context
+}
+
+data "aws_iam_policy_document" "ecs_task" {
+  statement {
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["ecs-tasks.amazonaws.com"]
+    }
+  }
+}
+
+resource "aws_iam_role" "ecs_task" {
+  name               = module.task_label.id
+  assume_role_policy = data.aws_iam_policy_document.ecs_task.json
+  tags               = module.task_label.tags
+}
+
+module "exec_label" {
+  source      = "cloudposse/label/null"
+  version     = "0.25.0"
+  attributes  = ["exec"]
+  label_order = var.iam_role_label_order
+
+  context = module.this.context
+}
+
+data "aws_iam_policy_document" "ecs_task_exec" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["ecs-tasks.amazonaws.com"]
+    }
+  }
+}
+
+resource "aws_iam_role" "ecs_exec" {
+  name               = module.exec_label.id
+  assume_role_policy = data.aws_iam_policy_document.ecs_task_exec.json
+  tags               = module.exec_label.tags
+}
+
+data "aws_iam_policy_document" "ecs_exec" {
+  statement {
+    effect    = "Allow"
+    resources = ["*"]
+
+    actions = [
+      "ssm:GetParameters",
+      "ecr:GetAuthorizationToken",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchGetImage",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ]
+  }
+}
+
+resource "aws_iam_role_policy" "ecs_exec" {
+  name   = module.exec_label.id
+  policy = data.aws_iam_policy_document.ecs_exec.json
+  role   = aws_iam_role.ecs_exec.id
+}
+
 module "container_definition" {
   count   = var.use_redis ? 1 : 0
   source  = "cloudposse/ecs-container-definition/aws"
@@ -102,6 +179,8 @@ module "redis" {
   network_mode                       = var.redis_network_mode
   propagate_tags                     = var.redis_propagate_tags
   vpc_id                             = var.redis_vpc_id
+  task_role_arn                      = [aws_iam_role.ecs_task.arn]
+  task_exec_role_arn                 = [aws_iam_role.ecs_exec.arn]
 
   service_registries = [{
     registry_arn   = aws_service_discovery_service.this[0].arn
