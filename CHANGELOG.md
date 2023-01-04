@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.1](https://github.com/justtrackio/terraform-aws-kvstore/compare/v1.1.0...v1.1.1) (2023-01-04)
+
+
+### Bug Fixes
+
+* Adjust service discovery name ([#4](https://github.com/justtrackio/terraform-aws-kvstore/issues/4)) ([825b1b8](https://github.com/justtrackio/terraform-aws-kvstore/commit/825b1b8a1edb5e38067715023bf9a99eea6e24e3))
+
 ## [1.1.0](https://github.com/justtrackio/terraform-aws-kvstore/compare/v1.0.1...v1.1.0) (2022-12-19)
 
 
