@@ -201,7 +201,7 @@ module "redis" {
 
 resource "aws_service_discovery_service" "this" {
   count = var.use_redis ? 1 : 0
-  name  = "kvstore_${try(var.attributes[0], "")}.${module.this.name}.redis"
+  name  = "kvstore_${try(var.attributes[0], "")}.${module.this.stage}-${module.this.name}.redis"
 
   dns_config {
     namespace_id = var.redis_service_discovery_dns_namespace_id
