@@ -37,7 +37,7 @@ module "redis_label" {
 }
 
 module "ddb" {
-  source = "github.com/justtrackio/terraform-aws-dynamodb-table?ref=v1.0.0"
+  source = "github.com/justtrackio/terraform-aws-dynamodb-table?ref=v1.0.1"
 
   context    = module.ddb_label.context
   attributes = concat(["kvstore-${try(var.attributes[0], "")}"], local.has_additional_attributes ? slice(var.attributes, 1, length(var.attributes)) : [])
