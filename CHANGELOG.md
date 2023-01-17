@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.2](https://github.com/justtrackio/terraform-aws-kvstore/compare/v1.1.1...v1.1.2) (2023-01-17)
+
+
+### Bug Fixes
+
+* Attributes usages, label order var names and renames ([#13](https://github.com/justtrackio/terraform-aws-kvstore/issues/13)) ([172e8d8](https://github.com/justtrackio/terraform-aws-kvstore/commit/172e8d8165c228d39785291cc00b0465e237f3e8))
+
 ## [1.1.1](https://github.com/justtrackio/terraform-aws-kvstore/compare/v1.1.0...v1.1.1) (2023-01-04)
 
 
