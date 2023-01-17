@@ -1,5 +1,5 @@
 locals {
-  has_additional_attributes = length(var.attributes) > 1
+  has_additional_attributes = length(module.this.attributes) > 1
   redis_container_name      = "redis"
 }
 
@@ -27,20 +27,20 @@ module "ddb_label" {
 }
 
 module "redis_label" {
-  count   = var.use_redis ? 1 : 0
+  count   = var.redis_enabled ? 1 : 0
   source  = "cloudposse/label/null"
   version = "0.25.0"
 
   context     = module.ddb_label.context
-  attributes  = concat(["kvstore_${try(var.attributes[0], "")}"], local.has_additional_attributes ? slice(var.attributes, 1, length(var.attributes)) : [])
+  attributes  = concat(["kvstore_${try(module.this.attributes[0], "")}"], local.has_additional_attributes ? slice(module.this.attributes, 1, length(module.this.attributes)) : [])
   label_order = var.redis_label_order
 }
 
 module "ddb" {
-  source = "github.com/justtrackio/terraform-aws-dynamodb-table?ref=v1.0.0"
+  source = "github.com/justtrackio/terraform-aws-dynamodb-table?ref=v1.0.1"
 
   context    = module.ddb_label.context
-  attributes = concat(["kvstore-${try(var.attributes[0], "")}"], local.has_additional_attributes ? slice(var.attributes, 1, length(var.attributes)) : [])
+  attributes = concat(["kvstore-${try(module.this.attributes[0], "")}"], local.has_additional_attributes ? slice(module.this.attributes, 1, length(module.this.attributes)) : [])
 
   billing_mode = var.ddb_billing_mode
 
@@ -57,7 +57,7 @@ module "ddb" {
   ttl_enabled = false
 
   tags = {
-    Model = "kvstore_${try(var.attributes[0], "")}"
+    Model = "kvstore_${try(module.this.attributes[0], "")}"
   }
 }
 
@@ -65,7 +65,7 @@ module "task_label" {
   source      = "cloudposse/label/null"
   version     = "0.25.0"
   attributes  = ["task"]
-  label_order = var.iam_role_label_order
+  label_order = var.iam_label_order
 
   context = module.this.context
 }
@@ -92,7 +92,7 @@ module "exec_label" {
   source      = "cloudposse/label/null"
   version     = "0.25.0"
   attributes  = ["exec"]
-  label_order = var.iam_role_label_order
+  label_order = var.iam_label_order
 
   context = module.this.context
 }
@@ -139,7 +139,7 @@ resource "aws_iam_role_policy" "ecs_exec" {
 }
 
 module "container_definition" {
-  count   = var.use_redis ? 1 : 0
+  count   = var.redis_enabled ? 1 : 0
   source  = "cloudposse/ecs-container-definition/aws"
   version = "0.58.1"
 
@@ -163,7 +163,7 @@ module "container_definition" {
 }
 
 module "redis" {
-  count   = var.use_redis ? 1 : 0
+  count   = var.redis_enabled ? 1 : 0
   source  = "cloudposse/ecs-alb-service-task/aws"
   version = "0.66.4"
 
@@ -189,7 +189,7 @@ module "redis" {
   }]
 
   tags = {
-    Model           = "kvstore_${try(var.attributes[0], "")}"
+    Model           = "kvstore_${try(module.this.attributes[0], "")}"
     ApplicationType = "redis"
   }
 
@@ -200,8 +200,8 @@ module "redis" {
 }
 
 resource "aws_service_discovery_service" "this" {
-  count = var.use_redis ? 1 : 0
-  name  = "kvstore_${try(var.attributes[0], "")}.${module.this.stage}-${module.this.name}.redis"
+  count = var.redis_enabled ? 1 : 0
+  name  = "kvstore_${try(module.this.attributes[0], "")}.${module.this.stage}-${module.this.name}.redis"
 
   dns_config {
     namespace_id = var.redis_service_discovery_dns_namespace_id
