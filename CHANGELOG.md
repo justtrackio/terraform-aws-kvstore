@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.3](https://github.com/justtrackio/terraform-aws-kvstore/compare/v1.1.2...v1.1.3) (2023-01-17)
+
+
+### Bug Fixes
+
+* Table only case ([#14](https://github.com/justtrackio/terraform-aws-kvstore/issues/14)) ([4cba83a](https://github.com/justtrackio/terraform-aws-kvstore/commit/4cba83aee2aa66bb748753c1048b42ba8b76505e))
+
 ## [1.1.2](https://github.com/justtrackio/terraform-aws-kvstore/compare/v1.1.1...v1.1.2) (2023-01-17)
 
 
