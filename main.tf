@@ -83,6 +83,8 @@ data "aws_iam_policy_document" "ecs_task" {
 }
 
 resource "aws_iam_role" "ecs_task" {
+  count = var.redis_enabled ? 1 : 0
+
   name               = module.task_label.id
   assume_role_policy = data.aws_iam_policy_document.ecs_task.json
   tags               = module.task_label.tags
@@ -109,6 +111,8 @@ data "aws_iam_policy_document" "ecs_task_exec" {
 }
 
 resource "aws_iam_role" "ecs_exec" {
+  count = var.redis_enabled ? 1 : 0
+
   name               = module.exec_label.id
   assume_role_policy = data.aws_iam_policy_document.ecs_task_exec.json
   tags               = module.exec_label.tags
@@ -133,9 +137,11 @@ data "aws_iam_policy_document" "ecs_exec" {
 }
 
 resource "aws_iam_role_policy" "ecs_exec" {
+  count = var.redis_enabled ? 1 : 0
+
   name   = module.exec_label.id
   policy = data.aws_iam_policy_document.ecs_exec.json
-  role   = aws_iam_role.ecs_exec.id
+  role   = aws_iam_role.ecs_exec[0].id
 }
 
 module "container_definition" {
@@ -179,8 +185,8 @@ module "redis" {
   network_mode                       = var.redis_network_mode
   propagate_tags                     = var.redis_propagate_tags
   vpc_id                             = var.redis_vpc_id
-  task_role_arn                      = [aws_iam_role.ecs_task.arn]
-  task_exec_role_arn                 = [aws_iam_role.ecs_exec.arn]
+  task_role_arn                      = [aws_iam_role.ecs_task[0].arn]
+  task_exec_role_arn                 = [aws_iam_role.ecs_exec[0].arn]
 
   service_registries = [{
     registry_arn   = aws_service_discovery_service.this[0].arn
