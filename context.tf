@@ -200,7 +200,7 @@ variable "label_order" { # tflint-ignore: terraform_standard_module_structure
 
 variable "regex_replace_chars" { # tflint-ignore: terraform_standard_module_structure
   type        = string
-  default     = "/[^a-zA-Z0-9-_]/"
+  default     = null
   description = <<-EOT
     Terraform regular expression (regex) string.
     Characters matching the regex will be removed from the ID elements.
