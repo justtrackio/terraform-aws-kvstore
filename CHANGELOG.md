@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0](https://github.com/justtrackio/terraform-aws-kvstore/compare/v1.1.3...v1.2.0) (2023-01-20)
+
+
+### Features
+
+* add ability to set service discovery name for redis kvstore ([#15](https://github.com/justtrackio/terraform-aws-kvstore/issues/15)) ([18edb49](https://github.com/justtrackio/terraform-aws-kvstore/commit/18edb496fc1f8167d9b845ee8fdc953bcb5d8d04))
+
 ## [1.1.3](https://github.com/justtrackio/terraform-aws-kvstore/compare/v1.1.2...v1.1.3) (2023-01-17)
 
 
