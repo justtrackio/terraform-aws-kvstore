@@ -24,24 +24,14 @@ variable "ddb_billing_mode" {
   description = "The billing mode for the DDB table"
 }
 
-variable "ddb_label_order" {
-  type        = list(string)
-  default     = null
-  description = <<-EOT
-    The order in which the labels (ID elements) appear in the `id`.
-    Defaults to ["namespace", "environment", "stage", "name", "attributes"].
-    You can omit any of the 6 labels ("tenant" is the 6th), but at least one must be present.
-    EOT
-}
-
-variable "iam_label_order" {
-  type        = list(string)
-  default     = null
-  description = <<-EOT
-    The order in which the labels (ID elements) appear in the `id`.
-    Defaults to ["namespace", "environment", "stage", "name", "attributes"].
-    You can omit any of the 6 labels ("tenant" is the 6th), but at least one must be present.
-    EOT
+variable "label_orders" {
+  type = object({
+    iam   = optional(list(string)),
+    ddb   = optional(list(string)),
+    redis = optional(list(string)),
+  })
+  default     = {}
+  description = "Overrides the `labels_order` for the different labels to modify ID elements appear in the `id`"
 }
 
 variable "redis_cpu_size" {
@@ -90,16 +80,6 @@ variable "redis_image_tag" {
   type        = string
   description = "Redis image tag to use when use_redis is true"
   default     = "7-alpine"
-}
-
-variable "redis_label_order" {
-  type        = list(string)
-  default     = null
-  description = <<-EOT
-    The order in which the labels (ID elements) appear in the `id`.
-    Defaults to ["namespace", "environment", "stage", "name", "attributes"].
-    You can omit any of the 6 labels ("tenant" is the 6th), but at least one must be present.
-    EOT
 }
 
 variable "redis_launch_type" {
@@ -151,4 +131,10 @@ variable "redis_vpc_id" {
   type        = string
   default     = null
   description = "ID of the aws vpc in which to spawn the redis service"
+}
+
+variable "redis_service_discovery_name" {
+  type        = string
+  default     = null
+  description = "Name for the service discovery entry in cloudmap"
 }

@@ -17,7 +17,7 @@ module "ddb_label" {
   delimiter           = module.this.delimiter
   tags                = module.this.tags
   additional_tag_map  = module.this.additional_tag_map
-  label_order         = var.ddb_label_order
+  label_order         = var.label_orders.ddb
   regex_replace_chars = module.this.regex_replace_chars
   id_length_limit     = module.this.id_length_limit
   label_key_case      = var.label_key_case
@@ -33,11 +33,12 @@ module "redis_label" {
 
   context     = module.ddb_label.context
   attributes  = concat(["kvstore_${try(module.this.attributes[0], "")}"], local.has_additional_attributes ? slice(module.this.attributes, 1, length(module.this.attributes)) : [])
-  label_order = var.redis_label_order
+  label_order = var.label_orders.redis
 }
 
 module "ddb" {
-  source = "github.com/justtrackio/terraform-aws-dynamodb-table?ref=v1.0.1"
+  source  = "justtrackio/dynamodb-table/aws"
+  version = "1.0.2"
 
   context    = module.ddb_label.context
   attributes = concat(["kvstore-${try(module.this.attributes[0], "")}"], local.has_additional_attributes ? slice(module.this.attributes, 1, length(module.this.attributes)) : [])
@@ -65,7 +66,7 @@ module "task_label" {
   source      = "cloudposse/label/null"
   version     = "0.25.0"
   attributes  = ["task"]
-  label_order = var.iam_label_order
+  label_order = var.label_orders.iam
 
   context = module.this.context
 }
@@ -94,7 +95,7 @@ module "exec_label" {
   source      = "cloudposse/label/null"
   version     = "0.25.0"
   attributes  = ["exec"]
-  label_order = var.iam_label_order
+  label_order = var.label_orders.iam
 
   context = module.this.context
 }
@@ -207,7 +208,7 @@ module "redis" {
 
 resource "aws_service_discovery_service" "this" {
   count = var.redis_enabled ? 1 : 0
-  name  = "kvstore_${try(module.this.attributes[0], "")}.${module.this.stage}-${module.this.name}.redis"
+  name  = var.redis_service_discovery_name
 
   dns_config {
     namespace_id = var.redis_service_discovery_dns_namespace_id
