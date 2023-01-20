@@ -6,4 +6,5 @@ module "example" {
   attributes                               = ["myEntity"]
   redis_ecs_cluster_arn                    = "arn:aws:ecs:eu-central-1:123456789123:cluster/my-cluster"
   redis_service_discovery_dns_namespace_id = "ns-ab12c34defghij5k"
+  redis_service_discovery_name             = "my_kvstore.service-name.redis"
 }
