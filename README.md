@@ -22,23 +22,15 @@ Terraform module which creates a kvstore backed by dynamodb and redis
 | <a name="module_container_definition"></a> [container\_definition](#module\_container\_definition) | cloudposse/ecs-container-definition/aws | 0.58.1 |
 | <a name="module_ddb"></a> [ddb](#module\_ddb) | justtrackio/dynamodb-table/aws | 1.0.2 |
 | <a name="module_ddb_label"></a> [ddb\_label](#module\_ddb\_label) | cloudposse/label/null | 0.25.0 |
-| <a name="module_exec_label"></a> [exec\_label](#module\_exec\_label) | cloudposse/label/null | 0.25.0 |
 | <a name="module_redis"></a> [redis](#module\_redis) | cloudposse/ecs-alb-service-task/aws | 0.66.4 |
 | <a name="module_redis_label"></a> [redis\_label](#module\_redis\_label) | cloudposse/label/null | 0.25.0 |
-| <a name="module_task_label"></a> [task\_label](#module\_task\_label) | cloudposse/label/null | 0.25.0 |
 | <a name="module_this"></a> [this](#module\_this) | cloudposse/label/null | 0.25.0 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [aws_iam_role.ecs_exec](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
-| [aws_iam_role.ecs_task](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
-| [aws_iam_role_policy.ecs_exec](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
 | [aws_service_discovery_service.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/service_discovery_service) | resource |
-| [aws_iam_policy_document.ecs_exec](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
-| [aws_iam_policy_document.ecs_task](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
-| [aws_iam_policy_document.ecs_task_exec](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 
@@ -50,6 +42,7 @@ Terraform module which creates a kvstore backed by dynamodb and redis
 | <a name="input_ddb_autoscale_read_schedule"></a> [ddb\_autoscale\_read\_schedule](#input\_ddb\_autoscale\_read\_schedule) | Provides an DynamoDB autoscaling scheduled action resource | <pre>list(object({<br>    schedule     = string<br>    min_capacity = number<br>    max_capacity = number<br>  }))</pre> | `[]` | no |
 | <a name="input_ddb_autoscale_write_schedule"></a> [ddb\_autoscale\_write\_schedule](#input\_ddb\_autoscale\_write\_schedule) | Provides an DynamoDB autoscaling scheduled action resource | <pre>list(object({<br>    schedule     = string<br>    min_capacity = number<br>    max_capacity = number<br>  }))</pre> | `[]` | no |
 | <a name="input_ddb_billing_mode"></a> [ddb\_billing\_mode](#input\_ddb\_billing\_mode) | The billing mode for the DDB table | `string` | `"PROVISIONED"` | no |
+| <a name="input_ddb_enabled"></a> [ddb\_enabled](#input\_ddb\_enabled) | Defines if ddb is to be used or not | `bool` | `true` | no |
 | <a name="input_delimiter"></a> [delimiter](#input\_delimiter) | Delimiter to be used between ID elements.<br>Defaults to `-` (hyphen). Set to `""` to use no delimiter at all. | `string` | `null` | no |
 | <a name="input_descriptor_formats"></a> [descriptor\_formats](#input\_descriptor\_formats) | Describe additional descriptors to be output in the `descriptors` output map.<br>Map of maps. Keys are names of descriptors. Values are maps of the form<br>`{<br>   format = string<br>   labels = list(string)<br>}`<br>(Type is `any` so the map values can later be enhanced to provide additional options.)<br>`format` is a Terraform format string to be passed to the `format()` function.<br>`labels` is a list of labels, in order, to pass to `format()` function.<br>Label values will be normalized before being passed to `format()` so they will be<br>identical to how they appear in `id`.<br>Default is `{}` (`descriptors` output will be empty). | `any` | `{}` | no |
 | <a name="input_enabled"></a> [enabled](#input\_enabled) | Set to false to prevent the module from creating any resources | `bool` | `null` | no |

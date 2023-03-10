@@ -70,6 +70,13 @@ variable "redis_enabled" {
   description = "Defines if redis is to be used or not"
 }
 
+variable "ddb_enabled" {
+  default     = true
+  type        = bool
+  description = "Defines if ddb is to be used or not"
+}
+
+
 variable "redis_image_repository" {
   type        = string
   description = "Redis image repository to use when use_redis is true"
