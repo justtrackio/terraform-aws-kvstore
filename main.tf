@@ -38,7 +38,7 @@ module "redis_label" {
 
 module "ddb" {
   source  = "justtrackio/dynamodb-table/aws"
-  version = "1.0.2"
+  version = "1.0.3"
 
   context    = module.ddb_label.context
   attributes = concat(["kvstore-${try(module.this.attributes[0], "")}"], local.has_additional_attributes ? slice(module.this.attributes, 1, length(module.this.attributes)) : [])

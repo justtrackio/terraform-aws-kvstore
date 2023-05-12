@@ -7,20 +7,20 @@ Terraform module which creates a kvstore backed by dynamodb and redis
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.40 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.67 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.40 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.67 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_container_definition"></a> [container\_definition](#module\_container\_definition) | cloudposse/ecs-container-definition/aws | 0.58.1 |
-| <a name="module_ddb"></a> [ddb](#module\_ddb) | justtrackio/dynamodb-table/aws | 1.0.2 |
+| <a name="module_ddb"></a> [ddb](#module\_ddb) | justtrackio/dynamodb-table/aws | 1.0.3 |
 | <a name="module_ddb_label"></a> [ddb\_label](#module\_ddb\_label) | cloudposse/label/null | 0.25.0 |
 | <a name="module_exec_label"></a> [exec\_label](#module\_exec\_label) | cloudposse/label/null | 0.25.0 |
 | <a name="module_redis"></a> [redis](#module\_redis) | cloudposse/ecs-alb-service-task/aws | 0.66.4 |
