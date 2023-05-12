@@ -21,10 +21,10 @@ Terraform module which creates a kvstore backed by dynamodb and redis
 |------|--------|---------|
 | <a name="module_container_definition"></a> [container\_definition](#module\_container\_definition) | cloudposse/ecs-container-definition/aws | 0.58.1 |
 | <a name="module_ddb"></a> [ddb](#module\_ddb) | justtrackio/dynamodb-table/aws | 1.0.3 |
-| <a name="module_ddb_label"></a> [ddb\_label](#module\_ddb\_label) | cloudposse/label/null | 0.25.0 |
+| <a name="module_ddb_label"></a> [ddb\_label](#module\_ddb\_label) | justtrackio/label/null | 0.26.0 |
 | <a name="module_exec_label"></a> [exec\_label](#module\_exec\_label) | cloudposse/label/null | 0.25.0 |
 | <a name="module_redis"></a> [redis](#module\_redis) | cloudposse/ecs-alb-service-task/aws | 0.66.4 |
-| <a name="module_redis_label"></a> [redis\_label](#module\_redis\_label) | cloudposse/label/null | 0.25.0 |
+| <a name="module_redis_label"></a> [redis\_label](#module\_redis\_label) | justtrackio/label/null | 0.26.0 |
 | <a name="module_task_label"></a> [task\_label](#module\_task\_label) | cloudposse/label/null | 0.25.0 |
 | <a name="module_this"></a> [this](#module\_this) | justtrackio/label/null | 0.26.0 |
 

@@ -5,8 +5,8 @@ locals {
 
 # can't just pull in the context here because the attributes add up instead of being replaced by the input
 module "ddb_label" {
-  source  = "cloudposse/label/null"
-  version = "0.25.0"
+  source  = "justtrackio/label/null"
+  version = "0.26.0"
 
   enabled             = module.this.enabled
   namespace           = module.this.namespace
@@ -28,8 +28,8 @@ module "ddb_label" {
 
 module "redis_label" {
   count   = var.redis_enabled ? 1 : 0
-  source  = "cloudposse/label/null"
-  version = "0.25.0"
+  source  = "justtrackio/label/null"
+  version = "0.26.0"
 
   context     = module.ddb_label.context
   attributes  = concat(["kvstore_${try(module.this.attributes[0], "")}"], local.has_additional_attributes ? slice(module.this.attributes, 1, length(module.this.attributes)) : [])
