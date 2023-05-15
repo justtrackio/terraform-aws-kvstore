@@ -7,26 +7,26 @@ Terraform module which creates a kvstore backed by dynamodb and redis
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.30.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.67 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.30.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.67 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_container_definition"></a> [container\_definition](#module\_container\_definition) | cloudposse/ecs-container-definition/aws | 0.58.1 |
-| <a name="module_ddb"></a> [ddb](#module\_ddb) | justtrackio/dynamodb-table/aws | 1.0.2 |
-| <a name="module_ddb_label"></a> [ddb\_label](#module\_ddb\_label) | cloudposse/label/null | 0.25.0 |
+| <a name="module_ddb"></a> [ddb](#module\_ddb) | justtrackio/dynamodb-table/aws | 1.0.3 |
+| <a name="module_ddb_label"></a> [ddb\_label](#module\_ddb\_label) | justtrackio/label/null | 0.26.0 |
 | <a name="module_exec_label"></a> [exec\_label](#module\_exec\_label) | cloudposse/label/null | 0.25.0 |
 | <a name="module_redis"></a> [redis](#module\_redis) | cloudposse/ecs-alb-service-task/aws | 0.66.4 |
-| <a name="module_redis_label"></a> [redis\_label](#module\_redis\_label) | cloudposse/label/null | 0.25.0 |
+| <a name="module_redis_label"></a> [redis\_label](#module\_redis\_label) | justtrackio/label/null | 0.26.0 |
 | <a name="module_task_label"></a> [task\_label](#module\_task\_label) | cloudposse/label/null | 0.25.0 |
-| <a name="module_this"></a> [this](#module\_this) | cloudposse/label/null | 0.25.0 |
+| <a name="module_this"></a> [this](#module\_this) | justtrackio/label/null | 0.26.0 |
 
 ## Resources
 
@@ -46,6 +46,8 @@ Terraform module which creates a kvstore backed by dynamodb and redis
 |------|-------------|------|---------|:--------:|
 | <a name="input_additional_tag_map"></a> [additional\_tag\_map](#input\_additional\_tag\_map) | Additional key-value pairs to add to each map in `tags_as_list_of_maps`. Not added to `tags` or `id`.<br>This is for some rare cases where resources want additional configuration of tags<br>and therefore take a list of maps with tag key, value, and additional configuration. | `map(string)` | `{}` | no |
 | <a name="input_attributes"></a> [attributes](#input\_attributes) | ID element. Additional attributes (e.g. `workers` or `cluster`) to add to `id`,<br>in the order they appear in the list. New attributes are appended to the<br>end of the list. The elements of the list are joined by the `delimiter`<br>and treated as a single ID element. | `list(string)` | `[]` | no |
+| <a name="input_aws_account_id"></a> [aws\_account\_id](#input\_aws\_account\_id) | AWS account id | `string` | `null` | no |
+| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS region | `string` | `null` | no |
 | <a name="input_context"></a> [context](#input\_context) | Single object for setting entire context at once.<br>See description of individual variables for details.<br>Leave string and numeric variables as `null` to use default value.<br>Individual variable settings (non-null) override settings in context object,<br>except for attributes, tags, and additional\_tag\_map, which are merged. | `any` | <pre>{<br>  "additional_tag_map": {},<br>  "attributes": [],<br>  "delimiter": null,<br>  "descriptor_formats": {},<br>  "enabled": true,<br>  "environment": null,<br>  "id_length_limit": null,<br>  "label_key_case": null,<br>  "label_order": [],<br>  "label_value_case": null,<br>  "labels_as_tags": [<br>    "unset"<br>  ],<br>  "name": null,<br>  "namespace": null,<br>  "regex_replace_chars": null,<br>  "stage": null,<br>  "tags": {},<br>  "tenant": null<br>}</pre> | no |
 | <a name="input_ddb_autoscale_read_schedule"></a> [ddb\_autoscale\_read\_schedule](#input\_ddb\_autoscale\_read\_schedule) | Provides an DynamoDB autoscaling scheduled action resource | <pre>list(object({<br>    schedule     = string<br>    min_capacity = number<br>    max_capacity = number<br>  }))</pre> | `[]` | no |
 | <a name="input_ddb_autoscale_write_schedule"></a> [ddb\_autoscale\_write\_schedule](#input\_ddb\_autoscale\_write\_schedule) | Provides an DynamoDB autoscaling scheduled action resource | <pre>list(object({<br>    schedule     = string<br>    min_capacity = number<br>    max_capacity = number<br>  }))</pre> | `[]` | no |
@@ -62,6 +64,7 @@ Terraform module which creates a kvstore backed by dynamodb and redis
 | <a name="input_labels_as_tags"></a> [labels\_as\_tags](#input\_labels\_as\_tags) | Set of labels (ID elements) to include as tags in the `tags` output.<br>Default is to include all labels.<br>Tags with empty values will not be included in the `tags` output.<br>Set to `[]` to suppress all generated tags.<br>**Notes:**<br>  The value of the `name` tag, if included, will be the `id`, not the `name`.<br>  Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be<br>  changed in later chained modules. Attempts to change it will be silently ignored. | `set(string)` | <pre>[<br>  "default"<br>]</pre> | no |
 | <a name="input_name"></a> [name](#input\_name) | ID element. Usually the component or solution name, e.g. 'app' or 'jenkins'.<br>This is the only ID element not also included as a `tag`.<br>The "name" tag is set to the full `id` string. There is no tag with the value of the `name` input. | `string` | `null` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | ID element. Usually an abbreviation of your organization name, e.g. 'eg' or 'cp', to help ensure generated IDs are globally unique | `string` | `null` | no |
+| <a name="input_organizational_unit"></a> [organizational\_unit](#input\_organizational\_unit) | Usually used to indicate the AWS organizational unit, e.g. 'prod', 'sdlc' | `string` | `null` | no |
 | <a name="input_redis_cpu_size"></a> [redis\_cpu\_size](#input\_redis\_cpu\_size) | The cpu size of the redis instance | `number` | `25` | no |
 | <a name="input_redis_deployment_maximum_percent"></a> [redis\_deployment\_maximum\_percent](#input\_redis\_deployment\_maximum\_percent) | The upper limit of the number of tasks (as a percentage of `desired_count`) that can be running in a service during a deployment | `number` | `100` | no |
 | <a name="input_redis_deployment_minimum_healthy_percent"></a> [redis\_deployment\_minimum\_healthy\_percent](#input\_redis\_deployment\_minimum\_healthy\_percent) | The lower limit (as a percentage of `desired_count`) of the number of tasks that must remain running and healthy in a service during a deployment | `number` | `0` | no |
