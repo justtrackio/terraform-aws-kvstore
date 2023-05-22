@@ -43,7 +43,7 @@ variable "redis_image_tag" {
 }
 
 variable "redis_maxmemory" {
-  type        = string
+  type        = number
   default     = 25
   description = "The memory size of the redis instance"
 }

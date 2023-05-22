@@ -18,7 +18,7 @@ No providers.
 |------|--------|---------|
 | <a name="module_ddb"></a> [ddb](#module\_ddb) | terraform-aws-modules/dynamodb-table/aws | 3.2.0 |
 | <a name="module_kvstore_label"></a> [kvstore\_label](#module\_kvstore\_label) | justtrackio/label/null | 0.26.0 |
-| <a name="module_redis"></a> [redis](#module\_redis) | ./terraform-aws-ecs-redis | n/a |
+| <a name="module_redis"></a> [redis](#module\_redis) | justtrackio/ecs-redis/aws | 2.0.0 |
 | <a name="module_this"></a> [this](#module\_this) | justtrackio/label/null | 0.26.0 |
 
 ## Resources
@@ -53,7 +53,7 @@ No resources.
 | <a name="input_redis_deployment_minimum_healthy_percent"></a> [redis\_deployment\_minimum\_healthy\_percent](#input\_redis\_deployment\_minimum\_healthy\_percent) | The lower limit (as a percentage of `desired_count`) of the number of tasks that must remain running and healthy in a service during a deployment | `number` | `0` | no |
 | <a name="input_redis_image_repository"></a> [redis\_image\_repository](#input\_redis\_image\_repository) | Redis image repository to use when use\_redis is true | `string` | `"redis"` | no |
 | <a name="input_redis_image_tag"></a> [redis\_image\_tag](#input\_redis\_image\_tag) | Redis image tag to use when use\_redis is true | `string` | `"7-alpine"` | no |
-| <a name="input_redis_maxmemory"></a> [redis\_maxmemory](#input\_redis\_maxmemory) | The memory size of the redis instance | `string` | `25` | no |
+| <a name="input_redis_maxmemory"></a> [redis\_maxmemory](#input\_redis\_maxmemory) | The memory size of the redis instance | `number` | `25` | no |
 | <a name="input_redis_maxmemory_policy"></a> [redis\_maxmemory\_policy](#input\_redis\_maxmemory\_policy) | When your Redis instance memory is full, and a new write comes in, Redis evicts keys to make room for the write based on your instance's maxmemory policy. | `string` | `"allkeys-lru"` | no |
 | <a name="input_redis_memory_size"></a> [redis\_memory\_size](#input\_redis\_memory\_size) | The memory size of the ECS container | `number` | `50` | no |
 | <a name="input_regex_replace_chars"></a> [regex\_replace\_chars](#input\_regex\_replace\_chars) | Terraform regular expression (regex) string.<br>Characters matching the regex will be removed from the ID elements.<br>If not set, `"/[^a-zA-Z0-9-]/"` is used to remove all characters other than hyphens, letters and digits. | `string` | `null` | no |

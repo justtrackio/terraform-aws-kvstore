@@ -28,8 +28,8 @@ module "ddb" {
 }
 
 module "redis" {
-  source = "./terraform-aws-ecs-redis"
-  #version = ""
+  source  = "justtrackio/ecs-redis/aws"
+  version = "2.0.0"
 
   context      = module.kvstore_label.context
   label_orders = var.label_orders
