@@ -1,3 +1,8 @@
+locals {
+  default_read_capacity  = var.ddb_billing_mode == "PROVISIONED" ? var.ddb_read_capacity == null ? 1 : var.ddb_read_capacity : null
+  default_write_capacity = var.ddb_billing_mode == "PROVISIONED" ? var.ddb_write_capacity == null ? 1 : var.ddb_write_capacity : null
+}
+
 module "kvstore_label" {
   source  = "justtrackio/label/null"
   version = "0.26.0"
@@ -19,6 +24,8 @@ module "ddb" {
   tags                = module.kvstore_label.tags
   autoscaling_enabled = var.ddb_autoscaling_enabled
   billing_mode        = var.ddb_billing_mode
+  read_capacity       = local.default_read_capacity
+  write_capacity      = local.default_write_capacity
 
   attributes = [
     {

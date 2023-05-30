@@ -1,7 +1,31 @@
+variable "ddb_autoscaling_enabled" {
+  description = "Whether or not to enable autoscaling. See note in README about this setting"
+  type        = bool
+  default     = true
+}
+
 variable "ddb_billing_mode" {
   type        = string
   default     = "PROVISIONED"
   description = "The billing mode for the DDB table"
+}
+
+variable "ddb_enabled" {
+  type        = bool
+  description = "For creating a dynamodb table"
+  default     = true
+}
+
+variable "ddb_read_capacity" {
+  description = "The number of read units for this table. If the billing_mode is PROVISIONED, this field should be greater than 0"
+  type        = number
+  default     = null
+}
+
+variable "ddb_write_capacity" {
+  description = "The number of write units for this table. If the billing_mode is PROVISIONED, this field should be greater than 0"
+  type        = number
+  default     = null
 }
 
 variable "label_orders" {
@@ -28,6 +52,12 @@ variable "redis_deployment_minimum_healthy_percent" {
   type        = number
   description = "The lower limit (as a percentage of `desired_count`) of the number of tasks that must remain running and healthy in a service during a deployment"
   default     = 0
+}
+
+variable "redis_enabled" {
+  type        = bool
+  description = "For creating a redis service"
+  default     = true
 }
 
 variable "redis_image_repository" {
@@ -58,22 +88,4 @@ variable "redis_memory_size" {
   type        = number
   default     = 50
   description = "The memory size of the ECS container"
-}
-
-variable "ddb_enabled" {
-  type        = bool
-  description = "For creating a dynamodb table"
-  default     = true
-}
-
-variable "redis_enabled" {
-  type        = bool
-  description = "For creating a redis service"
-  default     = true
-}
-
-variable "ddb_autoscaling_enabled" {
-  description = "Whether or not to enable autoscaling. See note in README about this setting"
-  type        = bool
-  default     = true
 }
