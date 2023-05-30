@@ -6,7 +6,7 @@ variable "ddb_billing_mode" {
 
 variable "label_orders" {
   type = object({
-    ecs = optional(list(string))
+    kvstore = optional(list(string), ["environment", "stage", "tenant", "name"])
   })
   default     = {}
   description = "Overrides the `labels_order` for the different labels to modify ID elements appear in the `id`"
@@ -58,4 +58,22 @@ variable "redis_memory_size" {
   type        = number
   default     = 50
   description = "The memory size of the ECS container"
+}
+
+variable "ddb_enabled" {
+  type        = bool
+  description = "For creating a dynamodb table"
+  default     = true
+}
+
+variable "redis_enabled" {
+  type        = bool
+  description = "For creating a redis service"
+  default     = true
+}
+
+variable "ddb_autoscaling_enabled" {
+  description = "Whether or not to enable autoscaling. See note in README about this setting"
+  type        = bool
+  default     = true
 }

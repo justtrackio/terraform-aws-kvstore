@@ -3,20 +3,21 @@ module "kvstore_label" {
   version = "0.26.0"
 
   label_value_case = "none"
-  label_order      = ["environment", "stage", "tenant", "name"]
+  label_order      = var.label_orders.kvstore
   tenant           = "kvstore"
 
   context = module.this.context
 }
 
 module "ddb" {
+  count   = var.ddb_enabled ? 1 : 0
   source  = "terraform-aws-modules/dynamodb-table/aws"
   version = "3.2.0"
 
   name                = module.kvstore_label.id
   hash_key            = "key"
   tags                = module.kvstore_label.tags
-  autoscaling_enabled = true
+  autoscaling_enabled = var.ddb_autoscaling_enabled
   billing_mode        = var.ddb_billing_mode
 
   attributes = [
@@ -28,6 +29,7 @@ module "ddb" {
 }
 
 module "redis" {
+  count   = var.redis_enabled ? 1 : 0
   source  = "justtrackio/ecs-redis/aws"
   version = "2.0.0"
 
