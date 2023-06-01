@@ -36,9 +36,8 @@ module "ddb" {
 }
 
 module "redis" {
-  count   = var.redis_enabled ? 1 : 0
-  source  = "justtrackio/ecs-redis/aws"
-  version = "2.0.0"
+  count  = var.redis_enabled ? 1 : 0
+  source = "github.com/justtrackio/terraform-aws-ecs-redis?ref=add_service_discovery_name_varibale"
 
   context      = module.kvstore_label.context
   label_orders = var.label_orders
@@ -51,4 +50,5 @@ module "redis" {
   container_image_tag                = var.redis_image_tag
   deployment_maximum_percent         = var.redis_deployment_maximum_percent
   deployment_minimum_healthy_percent = var.redis_deployment_minimum_healthy_percent
+  service_discovery_name             = "${module.kvstore_label.tenant}-${module.kvstore_label.name}.${module.kvstore_label.stage}"
 }

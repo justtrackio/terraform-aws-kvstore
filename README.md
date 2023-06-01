@@ -18,7 +18,7 @@ No providers.
 |------|--------|---------|
 | <a name="module_ddb"></a> [ddb](#module\_ddb) | terraform-aws-modules/dynamodb-table/aws | 3.2.0 |
 | <a name="module_kvstore_label"></a> [kvstore\_label](#module\_kvstore\_label) | justtrackio/label/null | 0.26.0 |
-| <a name="module_redis"></a> [redis](#module\_redis) | justtrackio/ecs-redis/aws | 2.0.0 |
+| <a name="module_redis"></a> [redis](#module\_redis) | github.com/justtrackio/terraform-aws-ecs-redis | add_service_discovery_name_varibale |
 | <a name="module_this"></a> [this](#module\_this) | justtrackio/label/null | 0.26.0 |
 
 ## Resources
