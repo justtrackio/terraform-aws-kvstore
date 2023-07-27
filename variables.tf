@@ -30,6 +30,7 @@ variable "ddb_write_capacity" {
 
 variable "label_orders" {
   type = object({
+    ecs     = optional(list(string), ["stage", "tenant", "name"])
     kvstore = optional(list(string), ["environment", "stage", "tenant", "name"])
   })
   default     = {}
