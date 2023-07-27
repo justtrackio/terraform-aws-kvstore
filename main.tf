@@ -36,8 +36,9 @@ module "ddb" {
 }
 
 module "redis" {
-  count  = var.redis_enabled ? 1 : 0
-  source = "github.com/justtrackio/terraform-aws-ecs-redis?ref=add_service_discovery_name_varibale"
+  count   = var.redis_enabled ? 1 : 0
+  source  = "justtrackio/ecs-redis/aws"
+  version = "2.1.0"
 
   context      = module.kvstore_label.context
   label_orders = var.label_orders
