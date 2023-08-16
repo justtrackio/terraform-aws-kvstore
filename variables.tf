@@ -4,6 +4,22 @@ variable "ddb_autoscaling_enabled" {
   default     = true
 }
 
+variable "ddb_autoscaling_read" {
+  description = "A map of read autoscaling settings. `max_capacity` is the only required key. See example in examples/autoscaling"
+  type        = map(string)
+  default = {
+    max_capacity = 100
+  }
+}
+
+variable "ddb_autoscaling_write" {
+  description = "A map of write autoscaling settings. `max_capacity` is the only required key. See example in examples/autoscaling"
+  type        = map(string)
+  default = {
+    max_capacity = 100
+  }
+}
+
 variable "ddb_billing_mode" {
   type        = string
   default     = "PROVISIONED"

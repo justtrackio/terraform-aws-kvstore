@@ -23,6 +23,8 @@ module "ddb" {
   hash_key            = "key"
   tags                = module.kvstore_label.tags
   autoscaling_enabled = var.ddb_autoscaling_enabled
+  autoscaling_read    = var.ddb_autoscaling_read
+  autoscaling_write   = var.ddb_autoscaling_write
   billing_mode        = var.ddb_billing_mode
   read_capacity       = local.default_read_capacity
   write_capacity      = local.default_write_capacity
