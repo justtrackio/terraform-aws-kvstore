@@ -148,7 +148,7 @@ resource "aws_iam_role_policy" "ecs_exec" {
 module "container_definition" {
   count   = var.redis_enabled ? 1 : 0
   source  = "cloudposse/ecs-container-definition/aws"
-  version = "0.58.1"
+  version = "0.60.1"
 
   container_image              = "${var.redis_image_repository}:${var.redis_image_tag}"
   container_name               = local.redis_container_name
