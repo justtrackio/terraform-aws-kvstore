@@ -1,3 +1,14 @@
+## [2.0.0](https://github.com/justtrackio/terraform-aws-kvstore/compare/v1.2.1...v2.0.0) (2023-09-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* refactor module (#32)
+
+### Features
+
+* refactor module ([#32](https://github.com/justtrackio/terraform-aws-kvstore/issues/32)) ([33510dd](https://github.com/justtrackio/terraform-aws-kvstore/commit/33510ddcb646c80828cbece3899834ebb78b2742))
+
 ## [1.2.1](https://github.com/justtrackio/terraform-aws-kvstore/compare/v1.2.0...v1.2.1) (2023-05-15)
 
 
