@@ -172,7 +172,7 @@ module "container_definition" {
 module "redis" {
   count   = var.redis_enabled ? 1 : 0
   source  = "cloudposse/ecs-alb-service-task/aws"
-  version = "0.66.4"
+  version = "0.71.0"
 
   context = module.redis_label[0].context
 
