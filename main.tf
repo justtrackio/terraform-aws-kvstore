@@ -1,6 +1,12 @@
 locals {
   default_read_capacity  = var.ddb_billing_mode == "PROVISIONED" ? var.ddb_read_capacity == null ? 1 : var.ddb_read_capacity : null
   default_write_capacity = var.ddb_billing_mode == "PROVISIONED" ? var.ddb_write_capacity == null ? 1 : var.ddb_write_capacity : null
+  ddb_autoscaling_read = var.ddb_billing_mode == "PROVISIONED" ? var.ddb_autoscaling_read == {} ? {
+    max_capacity = 100
+  } : var.ddb_autoscaling_read : {}
+  ddb_autoscaling_write = var.ddb_billing_mode == "PROVISIONED" ? var.ddb_autoscaling_write == {} ? {
+    max_capacity = 100
+  } : var.ddb_autoscaling_write : {}
 }
 
 module "kvstore_label" {
@@ -23,8 +29,8 @@ module "ddb" {
   hash_key            = "key"
   tags                = module.kvstore_label.tags
   autoscaling_enabled = var.ddb_autoscaling_enabled
-  autoscaling_read    = var.ddb_autoscaling_read
-  autoscaling_write   = var.ddb_autoscaling_write
+  autoscaling_read    = local.ddb_autoscaling_read
+  autoscaling_write   = local.ddb_autoscaling_write
   billing_mode        = var.ddb_billing_mode
   read_capacity       = local.default_read_capacity
   write_capacity      = local.default_write_capacity
