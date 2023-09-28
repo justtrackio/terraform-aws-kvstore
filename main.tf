@@ -1,5 +1,5 @@
 locals {
-  is_provisioned         = var.ddb_billing_mode == "PROVISIONED" ? true : false
+  is_provisioned         = var.ddb_billing_mode == "PROVISIONED"
   default_read_capacity  = local.is_provisioned ? var.ddb_read_capacity == null ? 1 : var.ddb_read_capacity : null
   default_write_capacity = local.is_provisioned ? var.ddb_write_capacity == null ? 1 : var.ddb_write_capacity : null
   ddb_autoscaling_read = local.is_provisioned ? var.ddb_autoscaling_read == null ? {
