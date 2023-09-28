@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/justtrackio/terraform-aws-kvstore/compare/v2.0.0...v2.0.1) (2023-09-28)
+
+
+### Bug Fixes
+
+* handle default for ddb autoscaling when on demand ([#44](https://github.com/justtrackio/terraform-aws-kvstore/issues/44)) ([505ac20](https://github.com/justtrackio/terraform-aws-kvstore/commit/505ac20f49b28ba590ead197de8937813ee4610a))
+
 ## [2.0.0](https://github.com/justtrackio/terraform-aws-kvstore/compare/v1.2.1...v2.0.0) (2023-09-27)
 
 
