@@ -1,10 +1,11 @@
 locals {
-  default_read_capacity  = var.ddb_billing_mode == "PROVISIONED" ? var.ddb_read_capacity == null ? 1 : var.ddb_read_capacity : null
-  default_write_capacity = var.ddb_billing_mode == "PROVISIONED" ? var.ddb_write_capacity == null ? 1 : var.ddb_write_capacity : null
-  ddb_autoscaling_read = var.ddb_billing_mode == "PROVISIONED" ? length(var.ddb_autoscaling_read) == 0 ? {
+  is_provisioned         = var.ddb_billing_mode == "PROVISIONED" ? true : false
+  default_read_capacity  = local.is_provisioned ? var.ddb_read_capacity == null ? 1 : var.ddb_read_capacity : null
+  default_write_capacity = local.is_provisioned ? var.ddb_write_capacity == null ? 1 : var.ddb_write_capacity : null
+  ddb_autoscaling_read = local.is_provisioned ? var.ddb_autoscaling_read == null ? {
     max_capacity = 100
   } : var.ddb_autoscaling_read : {}
-  ddb_autoscaling_write = var.ddb_billing_mode == "PROVISIONED" ? length(var.ddb_autoscaling_write) == 0 ? {
+  ddb_autoscaling_write = local.is_provisioned ? var.ddb_autoscaling_write == null ? {
     max_capacity = 100
   } : var.ddb_autoscaling_write : {}
 }
