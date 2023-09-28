@@ -7,17 +7,13 @@ variable "ddb_autoscaling_enabled" {
 variable "ddb_autoscaling_read" {
   description = "A map of read autoscaling settings. `max_capacity` is the only required key. See example in examples/autoscaling"
   type        = map(string)
-  default = {
-    max_capacity = 100
-  }
+  default     = null
 }
 
 variable "ddb_autoscaling_write" {
   description = "A map of write autoscaling settings. `max_capacity` is the only required key. See example in examples/autoscaling"
   type        = map(string)
-  default = {
-    max_capacity = 100
-  }
+  default     = null
 }
 
 variable "ddb_billing_mode" {
