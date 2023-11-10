@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/justtrackio/terraform-aws-kvstore/compare/v2.0.1...v2.0.2) (2023-11-10)
+
+
+### Bug Fixes
+
+* fixed output when redis not used ([#49](https://github.com/justtrackio/terraform-aws-kvstore/issues/49)) ([f3d0405](https://github.com/justtrackio/terraform-aws-kvstore/commit/f3d0405b09647a14f974a4b6efc1ed8b969b5770))
+
 ## [2.0.1](https://github.com/justtrackio/terraform-aws-kvstore/compare/v2.0.0...v2.0.1) (2023-09-28)
 
 
