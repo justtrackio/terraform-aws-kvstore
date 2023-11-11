@@ -24,7 +24,7 @@ module "kvstore_label" {
 module "ddb" {
   count   = var.ddb_enabled ? 1 : 0
   source  = "terraform-aws-modules/dynamodb-table/aws"
-  version = "3.2.0"
+  version = "3.3.0"
 
   name                = module.kvstore_label.id
   hash_key            = "key"
