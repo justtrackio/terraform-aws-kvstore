@@ -16,7 +16,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_ddb"></a> [ddb](#module\_ddb) | terraform-aws-modules/dynamodb-table/aws | 3.2.0 |
+| <a name="module_ddb"></a> [ddb](#module\_ddb) | justtrackio/dynamodb-table/aws | 2.0.0 |
 | <a name="module_kvstore_label"></a> [kvstore\_label](#module\_kvstore\_label) | justtrackio/label/null | 0.26.0 |
 | <a name="module_redis"></a> [redis](#module\_redis) | justtrackio/ecs-redis/aws | 2.1.0 |
 | <a name="module_this"></a> [this](#module\_this) | justtrackio/label/null | 0.26.0 |
