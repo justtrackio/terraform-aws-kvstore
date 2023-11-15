@@ -26,15 +26,19 @@ module "ddb" {
   source  = "justtrackio/dynamodb-table/aws"
   version = "2.0.1"
 
-  name                = module.kvstore_label.id
-  hash_key            = "key"
-  tags                = module.kvstore_label.tags
-  autoscaling_enabled = var.ddb_autoscaling_enabled
-  autoscaling_read    = local.ddb_autoscaling_read
-  autoscaling_write   = local.ddb_autoscaling_write
-  billing_mode        = var.ddb_billing_mode
-  read_capacity       = local.default_read_capacity
-  write_capacity      = local.default_write_capacity
+  name     = module.kvstore_label.id
+  hash_key = "key"
+  tags     = module.kvstore_label.tags
+
+  autoscaling_enabled    = var.ddb_autoscaling_enabled
+  autoscaling_read       = local.ddb_autoscaling_read
+  autoscaling_write      = local.ddb_autoscaling_write
+  schedule_scaling_read  = var.ddb_schedule_scaling_read
+  schedule_scaling_write = var.ddb_schedule_scaling_write
+
+  billing_mode   = var.ddb_billing_mode
+  read_capacity  = local.default_read_capacity
+  write_capacity = local.default_write_capacity
 
   attributes = [
     {
