@@ -15,7 +15,6 @@ variable "ddb_autoscaling_write" {
   type        = map(string)
   default     = null
 }
-
 variable "ddb_billing_mode" {
   type        = string
   default     = "PROVISIONED"
@@ -32,6 +31,26 @@ variable "ddb_read_capacity" {
   description = "The number of read units for this table. If the billing_mode is PROVISIONED, this field should be greater than 0"
   type        = number
   default     = null
+}
+
+variable "ddb_schedule_scaling_read" {
+  description = "A map of read schedule scaling settings. See example in examples/autoscaling"
+  type = list(object({
+    schedule     = string
+    min_capacity = number
+    max_capacity = number
+  }))
+  default = []
+}
+
+variable "ddb_schedule_scaling_write" {
+  description = "A map of write schedule scaling settings. See example in examples/autoscaling"
+  type = list(object({
+    schedule     = string
+    min_capacity = number
+    max_capacity = number
+  }))
+  default = []
 }
 
 variable "ddb_write_capacity" {
