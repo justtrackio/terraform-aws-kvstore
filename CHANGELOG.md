@@ -1,3 +1,10 @@
+## [2.1.0](https://github.com/justtrackio/terraform-aws-kvstore/compare/v2.0.4...v2.1.0) (2023-11-15)
+
+
+### Features
+
+* added scheduled scaling the backing ddb table ([#55](https://github.com/justtrackio/terraform-aws-kvstore/issues/55)) ([d9baa92](https://github.com/justtrackio/terraform-aws-kvstore/commit/d9baa921d3b3f779672a7aadf3e6aa440e17c18f))
+
 ## [2.0.4](https://github.com/justtrackio/terraform-aws-kvstore/compare/v2.0.3...v2.0.4) (2023-11-15)
 
 
