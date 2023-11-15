@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/justtrackio/terraform-aws-kvstore/compare/v2.1.0...v2.1.1) (2023-11-15)
+
+
+### Bug Fixes
+
+* update dynamodb table version ([#56](https://github.com/justtrackio/terraform-aws-kvstore/issues/56)) ([3708717](https://github.com/justtrackio/terraform-aws-kvstore/commit/3708717994cb9e077801f89679b3d11a8777d24d))
+
 ## [2.1.0](https://github.com/justtrackio/terraform-aws-kvstore/compare/v2.0.4...v2.1.0) (2023-11-15)
 
 
