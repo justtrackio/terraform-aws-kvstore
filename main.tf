@@ -51,7 +51,7 @@ module "ddb" {
 module "redis" {
   count   = var.redis_enabled ? 1 : 0
   source  = "justtrackio/ecs-redis/aws"
-  version = "2.1.0"
+  version = "2.2.0"
 
   context      = module.kvstore_label.context
   label_orders = var.label_orders
