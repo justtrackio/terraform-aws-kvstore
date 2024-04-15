@@ -1,3 +1,10 @@
+## [2.2.0](https://github.com/justtrackio/terraform-aws-kvstore/compare/v2.1.1...v2.2.0) (2024-04-15)
+
+
+### Features
+
+* add more flexibility to naming pattern ([#70](https://github.com/justtrackio/terraform-aws-kvstore/issues/70)) ([741074d](https://github.com/justtrackio/terraform-aws-kvstore/commit/741074d0e92a4c1493dc608b2d84c284a1bcf26f))
+
 ## [2.1.1](https://github.com/justtrackio/terraform-aws-kvstore/compare/v2.1.0...v2.1.1) (2023-11-15)
 
 
