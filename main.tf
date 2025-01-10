@@ -24,7 +24,7 @@ module "kvstore_label" {
 module "ddb" {
   count   = var.ddb_enabled ? 1 : 0
   source  = "justtrackio/dynamodb-table/aws"
-  version = "2.0.2"
+  version = "2.3.0"
 
   name     = module.kvstore_label.id
   hash_key = "key"
