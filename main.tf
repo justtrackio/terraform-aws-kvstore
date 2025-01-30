@@ -36,6 +36,9 @@ module "ddb" {
   schedule_scaling_read  = var.ddb_schedule_scaling_read
   schedule_scaling_write = var.ddb_schedule_scaling_write
 
+  deletion_protection_enabled    = var.ddb_deletion_protection_enabled
+  point_in_time_recovery_enabled = var.ddb_point_in_time_recovery_enabled
+
   billing_mode   = var.ddb_billing_mode
   read_capacity  = local.default_read_capacity
   write_capacity = local.default_write_capacity

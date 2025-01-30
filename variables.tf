@@ -15,15 +15,28 @@ variable "ddb_autoscaling_write" {
   type        = map(string)
   default     = null
 }
+
 variable "ddb_billing_mode" {
   type        = string
   default     = "PROVISIONED"
   description = "The billing mode for the DDB table"
 }
 
+variable "ddb_deletion_protection_enabled" {
+  description = "Enables deletion protection for table"
+  type        = bool
+  default     = true
+}
+
 variable "ddb_enabled" {
   type        = bool
   description = "For creating a dynamodb table"
+  default     = true
+}
+
+variable "ddb_point_in_time_recovery_enabled" {
+  description = "Whether to enable point-in-time recovery"
+  type        = bool
   default     = true
 }
 
