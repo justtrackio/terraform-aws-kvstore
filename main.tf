@@ -24,7 +24,7 @@ module "kvstore_label" {
 module "ddb" {
   count   = var.ddb_enabled ? 1 : 0
   source  = "justtrackio/dynamodb-table/aws"
-  version = "2.0.2"
+  version = "2.3.0"
 
   name     = module.kvstore_label.id
   hash_key = "key"
@@ -35,6 +35,9 @@ module "ddb" {
   autoscaling_write      = local.ddb_autoscaling_write
   schedule_scaling_read  = var.ddb_schedule_scaling_read
   schedule_scaling_write = var.ddb_schedule_scaling_write
+
+  deletion_protection_enabled    = var.ddb_deletion_protection_enabled
+  point_in_time_recovery_enabled = var.ddb_point_in_time_recovery_enabled
 
   billing_mode   = var.ddb_billing_mode
   read_capacity  = local.default_read_capacity
