@@ -1,3 +1,10 @@
+## [2.3.0](https://github.com/justtrackio/terraform-aws-kvstore/compare/v2.2.0...v2.3.0) (2025-01-30)
+
+
+### Features
+
+* update Terraform justtrackio/dynamodb-table/aws to v2.3.0 ([#68](https://github.com/justtrackio/terraform-aws-kvstore/issues/68)) ([4884329](https://github.com/justtrackio/terraform-aws-kvstore/commit/488432912c3cba2e441710d59790700a819f542c))
+
 ## [2.2.0](https://github.com/justtrackio/terraform-aws-kvstore/compare/v2.1.1...v2.2.0) (2024-04-15)
 
 
