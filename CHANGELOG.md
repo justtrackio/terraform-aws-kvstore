@@ -1,3 +1,10 @@
+## [2.4.0](https://github.com/justtrackio/terraform-aws-kvstore/compare/v2.3.0...v2.4.0) (2025-02-05)
+
+
+### Features
+
+* pull redis from ecr by default ([#97](https://github.com/justtrackio/terraform-aws-kvstore/issues/97)) ([0573cb7](https://github.com/justtrackio/terraform-aws-kvstore/commit/0573cb756e8ddace5fa60f54e44e4a4e3f4f178e))
+
 ## [2.3.0](https://github.com/justtrackio/terraform-aws-kvstore/compare/v2.2.0...v2.3.0) (2025-01-30)
 
 
