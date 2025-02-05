@@ -109,7 +109,7 @@ variable "redis_enabled" {
 variable "redis_image_repository" {
   type        = string
   description = "Redis image repository to use when use_redis is true"
-  default     = "redis"
+  default     = "public.ecr.aws/docker/library/redis"
 }
 
 variable "redis_image_tag" {
