@@ -1,3 +1,10 @@
+## [2.5.0](https://github.com/justtrackio/terraform-aws-kvstore/compare/v2.4.0...v2.5.0) (2025-02-07)
+
+
+### Features
+
+* pass through resource variables for the task definition of redis ([#99](https://github.com/justtrackio/terraform-aws-kvstore/issues/99)) ([dc447ea](https://github.com/justtrackio/terraform-aws-kvstore/commit/dc447ea1f3d8ed760c4c0d39b92d5eac0683bd4f))
+
 ## [2.4.0](https://github.com/justtrackio/terraform-aws-kvstore/compare/v2.3.0...v2.4.0) (2025-02-05)
 
 
