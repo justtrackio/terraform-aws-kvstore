@@ -18,7 +18,7 @@ No providers.
 |------|--------|---------|
 | <a name="module_ddb"></a> [ddb](#module\_ddb) | justtrackio/dynamodb-table/aws | 2.3.0 |
 | <a name="module_kvstore_label"></a> [kvstore\_label](#module\_kvstore\_label) | justtrackio/label/null | 0.26.0 |
-| <a name="module_redis"></a> [redis](#module\_redis) | justtrackio/ecs-redis/aws | 2.3.0 |
+| <a name="module_redis"></a> [redis](#module\_redis) | justtrackio/ecs-redis/aws | 2.4.0 |
 | <a name="module_this"></a> [this](#module\_this) | justtrackio/label/null | 0.26.0 |
 
 ## Resources
@@ -67,6 +67,8 @@ No resources.
 | <a name="input_redis_maxmemory"></a> [redis\_maxmemory](#input\_redis\_maxmemory) | The memory size of the redis instance | `number` | `25` | no |
 | <a name="input_redis_maxmemory_policy"></a> [redis\_maxmemory\_policy](#input\_redis\_maxmemory\_policy) | When your Redis instance memory is full, and a new write comes in, Redis evicts keys to make room for the write based on your instance's maxmemory policy. | `string` | `"allkeys-lru"` | no |
 | <a name="input_redis_memory_size"></a> [redis\_memory\_size](#input\_redis\_memory\_size) | The memory size of the ECS container | `number` | `50` | no |
+| <a name="input_redis_task_cpu_size"></a> [redis\_task\_cpu\_size](#input\_redis\_task\_cpu\_size) | The number of CPU units used by the task. If using `FARGATE` launch type `task_cpu` must match [supported memory values](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size) | `number` | `null` | no |
+| <a name="input_redis_task_memory_size"></a> [redis\_task\_memory\_size](#input\_redis\_task\_memory\_size) | The amount of memory (in MiB) used by the task. If using Fargate launch type `task_memory` must match [supported cpu value](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size) | `number` | `null` | no |
 | <a name="input_regex_replace_chars"></a> [regex\_replace\_chars](#input\_regex\_replace\_chars) | Terraform regular expression (regex) string.<br/>Characters matching the regex will be removed from the ID elements.<br/>If not set, `"/[^a-zA-Z0-9-]/"` is used to remove all characters other than hyphens, letters and digits. | `string` | `null` | no |
 | <a name="input_stage"></a> [stage](#input\_stage) | ID element. Usually used to indicate role, e.g. 'prod', 'staging', 'source', 'build', 'test', 'deploy', 'release' | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Additional tags (e.g. `{'BusinessUnit': 'XYZ'}`).<br/>Neither the tag keys nor the tag values will be modified by this module. | `map(string)` | `{}` | no |

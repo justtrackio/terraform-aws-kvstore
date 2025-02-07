@@ -129,9 +129,20 @@ variable "redis_maxmemory_policy" {
   description = "When your Redis instance memory is full, and a new write comes in, Redis evicts keys to make room for the write based on your instance's maxmemory policy."
   default     = "allkeys-lru"
 }
-
 variable "redis_memory_size" {
   type        = number
   default     = 50
   description = "The memory size of the ECS container"
+}
+
+variable "redis_task_cpu_size" {
+  type        = number
+  description = "The number of CPU units used by the task. If using `FARGATE` launch type `task_cpu` must match [supported memory values](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size)"
+  default     = null
+}
+
+variable "redis_task_memory_size" {
+  type        = number
+  description = "The amount of memory (in MiB) used by the task. If using Fargate launch type `task_memory` must match [supported cpu value](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size)"
+  default     = null
 }

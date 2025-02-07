@@ -54,7 +54,7 @@ module "ddb" {
 module "redis" {
   count   = var.redis_enabled ? 1 : 0
   source  = "justtrackio/ecs-redis/aws"
-  version = "2.3.0"
+  version = "2.4.0"
 
   context      = module.kvstore_label.context
   label_orders = var.label_orders
@@ -62,7 +62,9 @@ module "redis" {
   redis_maxmemory                    = var.redis_maxmemory
   redis_maxmemory_policy             = var.redis_maxmemory_policy
   container_cpu                      = var.redis_cpu_size
+  task_cpu                           = var.redis_task_cpu_size
   container_memory_reservation       = var.redis_memory_size
+  task_memory                        = var.redis_task_memory_size
   container_image_repository         = var.redis_image_repository
   container_image_tag                = var.redis_image_tag
   deployment_maximum_percent         = var.redis_deployment_maximum_percent
