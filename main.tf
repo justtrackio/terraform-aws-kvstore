@@ -43,12 +43,15 @@ module "ddb" {
   read_capacity  = local.default_read_capacity
   write_capacity = local.default_write_capacity
 
-  attributes = [
+  global_secondary_indexes              = var.ddb_global_secondary_indexes
+  ignore_changes_global_secondary_index = var.ddb_ignore_changes_global_secondary_index
+
+  attributes = concat([
     {
       name = "key"
       type = "S"
     }
-  ]
+  ], var.ddb_attributes)
 }
 
 module "redis" {

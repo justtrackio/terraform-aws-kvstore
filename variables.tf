@@ -1,3 +1,12 @@
+variable "ddb_attributes" {
+  description = "Additional attributes for the DDB table"
+  type = list(object({
+    name = string
+    type = string
+  }))
+  default = []
+}
+
 variable "ddb_autoscaling_enabled" {
   description = "Whether or not to enable autoscaling. See note in README about this setting"
   type        = bool
@@ -32,6 +41,26 @@ variable "ddb_enabled" {
   type        = bool
   description = "For creating a dynamodb table"
   default     = true
+}
+
+variable "ddb_global_secondary_indexes" {
+  description = "Describe GSIs for the table; subject to the normal limits on the number of GSIs, projected attributes, etc."
+  type = list(object({
+    name               = string
+    hash_key           = string
+    projection_type    = string
+    range_key          = optional(string)
+    read_capacity      = optional(number)
+    write_capacity     = optional(number)
+    non_key_attributes = optional(list(string))
+  }))
+  default = []
+}
+
+variable "ddb_ignore_changes_global_secondary_index" {
+  description = "Whether to ignore changes lifecycle to global secondary indices, useful for provisioned tables with scaling"
+  type        = bool
+  default     = false
 }
 
 variable "ddb_point_in_time_recovery_enabled" {
